@@ -1,0 +1,14 @@
+const express=require('express');
+const User=require('../models/user');
+const { getAllusers, register, getMyProfile, updateUser, deleteUser, login,logout } = require('../controllers/user');
+const { isAuthenticated } = require('../middlewares/auth');
+const router=express.Router();
+router.get('/all',getAllusers);
+router.post('/new',register);
+router.route('/login').post(login);
+router.get('/logout',logout);
+router.get('/me',isAuthenticated,getMyProfile).put(updateUser).delete(deleteUser);
+// router.get('/userid/:id',getuserDetails);
+// router.put('/userid/:id',updateUser);
+// router.delete('/userid/:id',deleteUser);
+module.exports=router;
